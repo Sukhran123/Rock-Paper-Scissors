@@ -1,3 +1,5 @@
+/* Logic section of code */
+/* Computer selects rock/paper/siczzors randomly */
 function computerPlay()
 {
     let choice = Math.floor(Math.random() * 3) + 1
@@ -14,55 +16,75 @@ function computerPlay()
         
      }
 }
-function processGame()
+/* Here is where the game is processed */
+function processGame(User)
 {
     let Computer = computerPlay()
-    let User = prompt("Enter Rock, Paper or Scizzors.");
     User = User.toLowerCase()
     Computer = Computer.toLowerCase()
     if (Computer === "rock") {
         switch(User){
             case "rock":
-                return "Draw, as Rock = Rock";
+                return "Draw, as computer had rock and Rock = Rock";
                 break;
             case "paper":
-                return "User wins, as Paper > Rock";
+                return "User wins, as computer had rock and Paper > Rock";
                 break;
             case "scizzors":
-                return "User looses, as Rock > Scizzors"
+                return "User looses, as computer had rock and Rock > Scizzors"
         }
     } else if (Computer === "paper") {
         switch(User){
             case "rock":
-                return "User looses, as Paper > Rock";
+                return "User looses, as computer had paper and Paper > Rock";
                 break;
             case "paper":
-                return "Draw, as Paper = Paper";
+                return "Draw, as computer had paper and Paper = Paper";
                 break;
             case "scizzors":
-                return "User wins, as Scizzors > Paper";
+                return "User wins, as computer had paper and Scizzors > Paper";
                 break;
         }
     } else if (Computer === "scizzors") {
         switch(User){
             case "rock":
-                return "User wins, as Rock > Scizzors";
+                return "User wins, as computer had scizzors and Rock > Scizzors";
                 break;
             case "paper":
-                return "User looses, as Scizzors > Paper";
+                return "User looses, as computer had scizzors and Scizzors > Paper";
                 break;
             case "scizzors":
-                return "User draws, as Scizzors = Scizzors";
+                return "User draws, as computer had scizzors and Scizzors = Scizzors";
                 break;
         }
     }
 }
-function game()
-{
-    for (let i = 1; i <= 5; i++) {
-        let result = processGame()
-        console.log(result)
-    }
 
+function result(message)
+{   
+    console.log(message)
+    document.getElementById("result").innerHTML = message
 }
-game()
+
+const scizzors = document.querySelector('#scizzors')
+scizzors.addEventListener('click', () => {
+    let message = processGame("Scizzors")
+    console.log(message)
+    result(message)
+})
+
+const rock = document.querySelector('#rock')
+rock.addEventListener('click', () => {
+    let message = processGame("Rock")
+    console.log(message)
+    result(message)
+})
+
+
+
+const paper = document.querySelector('#paper')
+paper.addEventListener('click', () => {
+    message = processGame("Paper")
+    console.log(message)
+    result(message)
+})
